@@ -148,20 +148,27 @@
                         </div>
                         
                         <div class="d-flex">
+                            
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3 input">Doctor Type</div>
+                            </div>
+                            <div class="col-xl-3 fv-row fv-plugins-icon-container">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">
+                                    <label id="lblHospitalMobile" class="fw-bold">: 
+                                        {% if doctortypeid == 1 %}
+                                            Physician
+                                        {% else %}
+                                            Surgeon
+                                        {% endif %}   
+                                    </label>
+                                </div>
+                            </div>
                             <div class="col-xl-3">
                                 <div class="fs-6 fw-semibold mt-2 mb-3 input">Speciality</div>
                             </div>
                             <div class="col-xl-3 fv-row fv-plugins-icon-container">
                                 <div class="fs-6 fw-semibold mt-2 mb-3">
                                     <label id="lblHospitalMobile" class="fw-bold">: {{speciality}} </label>
-                                </div>
-                            </div>
-                            <div class="col-xl-3">
-                                <div class="fs-6 fw-semibold mt-2 mb-3 input">Physician Number</div>
-                            </div>
-                            <div class="col-xl-3 fv-row fv-plugins-icon-container">
-                                <div class="fs-6 fw-semibold mt-2 mb-3">
-                                    <label id="lblHospitalMobile" class="fw-bold">: {{pnum}} </label>
                                 </div>
                             </div>
                         </div>

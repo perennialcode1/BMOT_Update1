@@ -18,7 +18,8 @@
                             
                         </li>
                         <span b-1mtsuay2f9 class="menu-icon-dark">
-                            </span>Doctors
+                            <span class="fs-4">Doctors</span>
+                        </span>
                         <li class="breadcrumb-item">
                             <span class="svg-icon svg-icon-5 svg-icon-gray-700 mx-n2">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +27,7 @@
                                 </svg>
                             </span>
                         </li>
-                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">Edit</li>
+                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1 fs-4">Edit</li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-3">
@@ -39,10 +40,8 @@
             </div>
         </div>
     </div>
+
     {% include 'doctors/sidebar.html' %}
-    
-        
-        
         <div class="container-xxl">
             <!--begin::Sidebar-->
             {% block sidebar %}
@@ -144,16 +143,33 @@
                                                             <input type="text" id="txtMobile" name="txtRegNumber" class="form-control mb-2" value="{{regno}}">
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
-                                                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                                                        <div class="fv-row w-70 flex-md-root">
+                                                            <label class="required form-label">Doctor Type</label>
+                                                            <select onchange="showContent(this.value)" id="doctorType" class="form-select" name="doctype" data-dropdown-css-class="w-200px" data-hide-search="true" data-allow-clear="true" data-control="select2" data-placeholder="Select status" required>
+                                                                <option value="" {% if not doctortypeid %} selected {% endif %}>Select type</option>
+                                                                <option value="1" {% if doctortypeid == 1 %} selected {% endif %}>Physician</option>
+                                                                <option value="2" {% if doctortypeid == 2 %} selected {% endif %}>Surgeon</option>
+                                                            </select>                                                                    
+                                                        </div>
+                                                        
+                                                        <div id="physician_content" class="fv-row w-100 flex-md-root fv-plugins-icon-container" style="display:none;">
                                                             <label class="required form-label">Speciality</label>
-                                                            <select class="form-select isrequired" data-allow-clear="true" data-control="select2" data-placeholder="Select Surgery" data-val="true" data-val-required="Surgery Speciality is required"id="speciality" name="speciality">
+                                                            <select name="physpeciality" class="form-select isrequired" data-allow-clear="true" data-control="select2" data-placeholder="Select doctor type" data-val="true" data-val-required="Doctor Speciality is required " required>
                                                                 <option></option>
                                                                 {% for i in speciality_dropdown_data %}
                                                                     <option value="{{ i.name }}" {% if i.name == speciality %}selected{% endif %}>{{ i.name }}</option>
                                                                 {% endfor %}
-                                                                {% comment %} <option value="other">Other</option> {% endcomment %}
                                                             </select>                                                                   
-                                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                        </div>
+                                                    
+                                                        <div id="surgeons_content" class="fv-row w-100 flex-md-root fv-plugins-icon-container" style="display:none;">
+                                                            <label class="required form-label">Speciality</label>
+                                                            <select name="surspeciality" class="form-select isrequired" data-allow-clear="true" data-control="select2" data-placeholder="Select doctor type" data-val="true" data-val-required="Doctor Speciality is required" required>
+                                                                <option></option>
+                                                                {% for i in speciality_surgeon_dropdown_data %}
+                                                                    <option value="{{ i.name }}" {% if i.name == speciality %}selected{% endif %}>{{ i.name }}</option>
+                                                                {% endfor %}
+                                                            </select>                                                                   
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,21 +179,42 @@
                                                         <span class="indicator-label">Save Changes</span>
                                                     </button>
                                                 </div>
-                                            </div>
-                                            
+                                            </div>  
                                         </div>
-                                       
                                     </div>
-                                
                                 </form>
-                    </div>
+                            </div>
+                        </div>
+
+                    <script>
+                        var seldoctype =  document.getElementById("doctorType").value;
+                        if (seldoctype == '1') {
+                            document.getElementById("surgeons_content").style.display = "none";
+                            document.getElementById("physician_content").style.display = "block";
+                        }
+                        else if (seldoctype == '2') {
+                            document.getElementById("physician_content").style.display = "none";
+                            document.getElementById("surgeons_content").style.display = "block";
+                        }
+
+                        function showContent(selectedValue) {
+                            var physician_content = document.getElementById("physician_content");
+                            var surgeons_content = document.getElementById("surgeons_content");
+
+                            if (selectedValue == '1') {
+                                document.getElementById("surgeons_content").style.display = "none";
+                                document.getElementById("physician_content").style.display = "block";
+                            }
+                            else if (selectedValue == '2') {
+                                document.getElementById("physician_content").style.display = "none";
+                                document.getElementById("surgeons_content").style.display = "block";
+                            }
+                        }
+                    </script>
                 </div>
-                {% endblock sidebar %}
-            </div>
-        {% endblock content %}
-    
+            {% endblock sidebar %}
+                {% endblock content %}
         </div>
-    {% comment %} {% endblock %} {% endcomment %}
 
 
 

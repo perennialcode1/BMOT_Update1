@@ -1,6 +1,4 @@
-﻿
-
-{% load static %}
+﻿{% load static %}
 
 <!DOCTYPE html>
 
@@ -21,8 +19,10 @@
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="shortcut icon" href="{% static 'book/assets/media/logos/favicon.png' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <link href="{% static 'book/assets/lib/custom/datatables/datatables.bundle.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'book/assets/lib/custom/vis-timeline/vis-timeline.bundle.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'book/assets/lib/custom/datatables/datatables.bundle.css' %}" rel="stylesheet"
+        type="text/css" />
+    <link href="{% static 'book/assets/lib/custom/vis-timeline/vis-timeline.bundle.css' %}" rel="stylesheet"
+        type="text/css" />
     <link href="{% static 'book/assets/lib/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'book/assets/css/style.bundle.css' %}" rel="stylesheet" type="text/css" />
     <script src="{% static 'book/assets/lib/jquery/dist/jquery.min.js' %}"></script>
@@ -30,6 +30,8 @@
     <script src="{% static 'book/assets/js/site.js' %}" asp-append-version="true"></script>
     <script src="{% static 'book/assets/js/bookmyot.js' %}"></script>
     <link href="{% static 'book/assets/lib/custom/datatables/datatables.bundle.js' %}">
+    <link href="{% static 'book/assets/js/datatables.bundle.js' %}">
+
 </head>
 
 <body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -86,9 +88,10 @@
     </div>
     <div class="d-flex flex-column flex-root app-root " id="kt_app_root">
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <div id="kt_app_header" class="app-header {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none {% elif request.path == '/verify-otp' %} d-none {% endif %}" data-kt-sticky="true"
-                data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky"
-                data-kt-sticky-offset="{default: false, lg: '300px'}">
+            <div id="kt_app_header"
+                class="app-header {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none {% elif request.path == '/verify-otp' %} d-none {% elif request.path == '/hospital-submit-faq' %} d-none {% elif request.path == '/hospital-get-faq' %} d-none {% endif %}"
+                data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}"
+                data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}">
                 <div class="app-container container-xxl d-flex align-items-stretch justify-content-between"
                     id="kt_app_header_container">
                     <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show sidebar menu">
@@ -106,231 +109,395 @@
                             </span>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-1 me-lg-13 {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none  {% elif request.path == '/verify-otp' %} d-none {% endif %}">
-                        <a href="/">
-                            <img alt="Logo" src="{% static 'book/assets/media/logos/bookmyot.png' %}" class="theme-light-show" />
-                            <img alt="Logo" src="{% static 'book/assets/media/logos/bookmyot.png' %}" class="theme-dark-show" />
+                    <div
+                        class="d-flex align-items-center flex-grow-1 flex-lg-grow-1 me-lg-13 {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none {% elif request.path == '/verify-otp' %} d-none {% elif request.path == '/hospital-submit-faq' %} d-none {% elif request.path == '/hospital-get-faq' %} d-none{% endif %}">
+                        <a href="{% url 'home' %}">
+                            <img alt="Logo" src="{% static 'book/assets/media/logos/bookmyot.png' %}"
+                                class="theme-light-show" />
+                            <img alt="Logo" src="{% static 'book/assets/media/logos/bookmyot.png' %}"
+                                class="theme-dark-show" />
                         </a>
                     </div>
-                    <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1 {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none  {% elif request.path == '/verify-otp' %} d-none {% endif %}"
-                    id="kt_app_header_wrapper">
-                    <div class="d-flex align-items-stretch" id="kt_app_header_menu_wrapper">
-                        <div class="app-header-menu app-header-mobile-drawer align-items-stretch"
-                            data-kt-drawer="true" data-kt-drawer-name="app-header-menu"
-                            data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-                            data-kt-drawer-width="{default:'200px', '300px': '250px'}"
-                            data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle"
-                            data-kt-swapper="true" data-kt-swapper-mode="prepend"
-                            data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_menu_wrapper'}">
-                            <div class="menu menu-rounded menu-column menu-lg-row menu-active-bg menu-title-gray-600 menu-state-dark menu-arrow-gray-400 fw-semibold fw-semibold fs-6 align-items-stretch my-5 my-lg-0 px-2 px-lg-0"
-                                id="#kt_app_header_menu" data-kt-menu="true">
+                    <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1 {% if request.path == '/' %} d-none {% elif request.path == '/hospital-registration' %} d-none  {% elif request.path == '/verify-otp' %} d-none {% elif request.path == '/hospital-submit-faq' %} d-none {% elif request.path == '/hospital-get-faq' %} d-none{% endif %}"
+                        id="kt_app_header_wrapper">
+                        <div class="d-flex align-items-stretch" id="kt_app_header_menu_wrapper">
+                            <div class="app-header-menu app-header-mobile-drawer align-items-stretch"
+                                data-kt-drawer="true" data-kt-drawer-name="app-header-menu"
+                                data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+                                data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+                                data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle"
+                                data-kt-swapper="true" data-kt-swapper-mode="prepend"
+                                data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_menu_wrapper'}">
+                                <div class="menu menu-rounded menu-column menu-lg-row menu-active-bg menu-title-gray-600 menu-state-dark menu-arrow-gray-400 fw-semibold fw-semibold fs-6 align-items-stretch my-5 my-lg-0 px-2 px-lg-0"
+                                    id="#kt_app_header_menu" data-kt-menu="true">
 
-                                <div class="{% if request.path == '/home' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %} menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
-                                    <a href="{% url 'home' %}" class="menu-link">
-                                        <span class="menu-icon-dark">
-                                            <i class="bi bi-columns-gap"></i>
-                                        </span>
-                                        <span class="menu-title">Home</span>
-                                        <span class="menu-arrow d-lg-none"></span>
-                                    </a>
-                                </div>
-                                <div class="{% if request.path == '/hospital-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
-                                    <a href="{% url 'hospital' %}" class="menu-link">
-                                        <span class="menu-icon-info">
-                                            <i class="fa-solid fa-square-h"></i>
-                                        </span>
-                                        <span class="menu-title">Hospital</span>
-                                        <span class="menu-arrow d-lg-none"></span>
-                                    </a>
-                                </div>
-                                
-                                <div class="{% if request.path == '/doctors-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
-                                    <a href="{% url 'doctors' %}" class="menu-link">
-                                        <span class="menu-icon-success">
-                                            <i class="fa-solid fa-user-doctor"></i>
-                                        </span>
-                                        <span class="menu-title">Doctor</span>
-                                        <span class="menu-arrow d-lg-none"></span>
-                                    </a>
-                                </div>
-                                <div b-1mtsuay2f9 class="{% if request.path == '/surgeries-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
-                                    <a b-1mtsuay2f9 href="{% url 'surgeries_list' %}" class="menu-link">
-                                        <span b-1mtsuay2f9 class="menu-icon-danger">
-                                            <i b-1mtsuay2f9 class="bi bi-heart-pulse"></i>
-                                        </span>
-                                        <span b-1mtsuay2f9 class="menu-title">Surgeries</span>
-                                        <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
-                                    </a>
-                                </div>
-                                <div b-1mtsuay2f9 class="{% if request.path == '/duties-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
-                                    <a b-1mtsuay2f9 href="{% url 'duties_list' %}" class="menu-link">
-                                        <span b-1mtsuay2f9 class="menu-icon-dark">
-                                            {% comment %} <i class="fa-solid fa-list-check"></i> {% endcomment %}
-                                            <i class="bi bi-clipboard-check"></i>
-                                        </span>
-                                        <span b-1mtsuay2f9 class="menu-title">Duties</span>
-                                        <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
-                                    </a>
-                                </div>
+                                    <div
+                                        class="{% if request.path == '/home' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %} menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+                                        <a href="{% url 'home' %}" class="menu-link">
+                                            <span class="menu-icon-dark">
+                                                <i class="bi bi-columns-gap"></i>
+                                            </span>
+                                            <span class="menu-title">Home</span>
+                                            <span class="menu-arrow d-lg-none"></span>
+                                        </a>
+                                    </div>
+                                    <div
+                                        class="{% if request.path == '/hospital-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+                                        <a href="{% url 'hospital' %}" class="menu-link">
+                                            <span class="menu-icon-info">
+                                                <i class="fa-solid fa-square-h"></i>
+                                            </span>
+                                            <span class="menu-title">Hospital</span>
+                                            <span class="menu-arrow d-lg-none"></span>
+                                        </a>
+                                    </div>
 
-                                <div b-1mtsuay2f9
-                                data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                                data-kt-menu-placement="bottom-start"
-                                data-kt-menu-offset="-220,0"
-                                class="{% if request.path == '/config-speciality-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-surgery-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-anesthesia-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-pre-existing-condintions-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-ot-equipment-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-app-notification' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-images' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
-                                {% if request.path == '/config-app-settings' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}"
-                              >
-                                
-                                    <span b-1mtsuay2f9 class="menu-link">
-                                        <span b-1mtsuay2f9 class="menu-icon-info">
-                                            <i b-1mtsuay2f9 class="bi bi-sliders"></i>
+                                    <div
+                                        class="{% if request.path == '/doctors-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+                                        <a href="{% url 'doctors' %}" class="menu-link">
+                                            <span class="menu-icon-success">
+                                                <i class="fa-solid fa-user-doctor"></i>
+                                            </span>
+                                            <span class="menu-title">Doctor</span>
+                                            <span class="menu-arrow d-lg-none"></span>
+                                        </a>
+                                    </div>
+                                    <div b-1mtsuay2f9
+                                        class="{% if request.path == '/surgeries-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+                                        <a b-1mtsuay2f9 href="{% url 'surgeries_list' %}" class="menu-link">
+                                            <span b-1mtsuay2f9 class="menu-icon-danger">
+                                                <i b-1mtsuay2f9 class="bi bi-heart-pulse"></i>
+                                            </span>
+                                            <span b-1mtsuay2f9 class="menu-title">Surgeries</span>
+                                            <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
+                                        </a>
+                                    </div>
+                                    <div b-1mtsuay2f9
+                                        class="{% if request.path == '/duties-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+                                        <a b-1mtsuay2f9 href="{% url 'duties_list' %}" class="menu-link">
+                                            <span b-1mtsuay2f9 class="menu-icon-dark">
+                                                {% comment %} <i class="fa-solid fa-list-check"></i> {% endcomment %}
+                                                <i class="bi bi-clipboard-check"></i>
+                                            </span>
+                                            <span b-1mtsuay2f9 class="menu-title">Duties</span>
+                                            <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
+                                        </a>
+                                    </div>
+
+                                    <div b-1mtsuay2f9 data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                                        data-kt-menu-placement="bottom-start" data-kt-menu-offset="-220,0"
+                                        class="{% if request.path == '/config-speciality-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-surgery-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-anesthesia-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-pre-existing-condintions-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-ot-equipment-list' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-app-notification' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-images' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% endif %}
+                                                {% if request.path == '/config-app-settings' %}menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2{% else %}menu-item menu-lg-down-accordion me-0 me-lg-2{% endif %}">
+
+                                        <span b-1mtsuay2f9 class="menu-link">
+                                            <span b-1mtsuay2f9 class="menu-icon-info">
+                                                <i b-1mtsuay2f9 class="bi bi-sliders"></i>
+                                            </span>
+                                            <span b-1mtsuay2f9 class="menu-title">Config</span>
+                                            <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
                                         </span>
-                                        <span b-1mtsuay2f9 class="menu-title">Config</span>
-                                        <span b-1mtsuay2f9 class="menu-arrow d-lg-none"></span>
-                                    </span>
-                                    <div b-1mtsuay2f9 class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-600px">
-                                        <div b-1mtsuay2f9 class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible" data-kt-menu-dismiss="true">
-                                            <div b-1mtsuay2f9 class="row">
-                                                <div b-1mtsuay2f9 class="col-lg-12 mb-3 mb-lg-0 py-3 px-3 py-lg-6 px-lg-6">
-                                                    <div b-1mtsuay2f9 class="row">
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_speciality_list' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-primary svg-icon-1">
-                                                                            <svg b-1mtsuay2f9 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">
-                                                                                <path b-1mtsuay2f9 d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z" />
-                                                                                <path b-1mtsuay2f9 d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z" />
-                                                                                <path b-1mtsuay2f9 d="M9.979 5.356a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.926-.08L4.69 10H4.5a.5.5 0 0 0 0 1H5a.5.5 0 0 0 .447-.276l.936-1.873 1.138 3.793a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h.5a.5.5 0 0 0 0-1h-.128L9.979 5.356Z" />
-                                                                            </svg>
+                                        <div b-1mtsuay2f9
+                                            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-600px">
+                                            <div b-1mtsuay2f9
+                                                class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible"
+                                                data-kt-menu-dismiss="true">
+                                                <div b-1mtsuay2f9 class="row">
+                                                    <div b-1mtsuay2f9
+                                                        class="col-lg-12 mb-3 mb-lg-0 py-3 px-3 py-lg-6 px-lg-6">
+                                                        <div b-1mtsuay2f9 class="row">
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_speciality_list' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-primary svg-icon-1">
+                                                                                <svg b-1mtsuay2f9
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    fill="currentColor"
+                                                                                    class="bi bi-clipboard2-pulse"
+                                                                                    viewBox="0 0 16 16">
+                                                                                    <path b-1mtsuay2f9
+                                                                                        d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z" />
+                                                                                    <path b-1mtsuay2f9
+                                                                                        d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z" />
+                                                                                    <path b-1mtsuay2f9
+                                                                                        d="M9.979 5.356a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.926-.08L4.69 10H4.5a.5.5 0 0 0 0 1H5a.5.5 0 0 0 .447-.276l.936-1.873 1.138 3.793a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h.5a.5.5 0 0 0 0-1h-.128L9.979 5.356Z" />
+                                                                                </svg>
+                                                                            </span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">Speciality</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Create/Update/Delete Specialities</span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Speciality</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Create/Update/Delete
+                                                                                Specialities</span>
+                                                                        </span>
+                                                                    </a>
 
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
 
-                                                                <a b-1mtsuay2f9 href="{% url 'config_surgery_list' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-danger svg-icon-1">
-                                                                            <svg b-1mtsuay2f9 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity" viewBox="0 0 16 16">
-                                                                                <path b-1mtsuay2f9 fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" />
-                                                                            </svg>
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_surgery_list' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-danger svg-icon-1">
+                                                                                <svg b-1mtsuay2f9
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    fill="currentColor"
+                                                                                    class="bi bi-activity"
+                                                                                    viewBox="0 0 16 16">
+                                                                                    <path b-1mtsuay2f9
+                                                                                        fill-rule="evenodd"
+                                                                                        d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" />
+                                                                                </svg>
+                                                                            </span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">Surgery Types</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Create/Update/Delete Surgery</span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Surgery
+                                                                                Types</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Create/Update/Delete
+                                                                                Surgery</span>
+                                                                        </span>
+                                                                    </a>
 
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_anetsthesia_list' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        {% comment %} <span b-1mtsuay2f9 class="svg-icon svg-icon-dark svg-icon-1">
-                                                                            <svg b-1mtsuay2f9 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
-                                                                                <path b-1mtsuay2f9 d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429l4.243 4.242Z" />
-                                                                            </svg>
-                                                                        </span> {% endcomment %}
-                                                                        <i class="fa-solid fa-capsules text-info fs-1"></i>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">Anesthesia Types</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Create/Update/Delete Anesthesia Type</span>
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_pre_existing_conditions_list' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-success svg-icon-1">
-                                                                            <svg b-1mtsuay2f9 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders2-vertical" viewBox="0 0 16 16">
-                                                                                <path b-1mtsuay2f9 fill-rule="evenodd" d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z" />
-                                                                            </svg>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_anetsthesia_list' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            
+                                                                            <i
+                                                                                class="fa-solid fa-capsules text-info fs-1"></i>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">Pre-Existing Conditions</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Configure Pre-Existing Conditions</span>
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_images' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-info svg-icon-1">
-                                                                            <i class="fa-solid fa-image text-warning fs-1"></i>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Anesthesia
+                                                                                Types</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Create/Update/Delete
+                                                                                Anesthesia Type</span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">Images</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Upload Images</span>
-                                                                    </span>
-                                                                </a>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_ot_equipment_list' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-info svg-icon-1">
-                                                                            <i class="fa-solid fa-user-clock text-primary fs-1"></i>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_pre_existing_conditions_list' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-success svg-icon-1">
+                                                                                <svg b-1mtsuay2f9
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    fill="currentColor"
+                                                                                    class="bi bi-sliders2-vertical"
+                                                                                    viewBox="0 0 16 16">
+                                                                                    <path b-1mtsuay2f9
+                                                                                        fill-rule="evenodd"
+                                                                                        d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z" />
+                                                                                </svg>
+                                                                            </span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">OT Equipment</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Add OT Equipment</span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Pre-Existing
+                                                                                Conditions</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Configure
+                                                                                Pre-Existing Conditions</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_app_notification' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-info svg-icon-1">
-                                                                            <i class="fa fa-envelope-circle-check text-success fs-1"></i>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9 href="{% url 'config_images' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-info svg-icon-1">
+                                                                                <i
+                                                                                    class="fa-solid fa-image text-warning fs-1"></i>
+                                                                            </span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">App Notification</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">Send notification</span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Images</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Upload
+                                                                                Images</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div b-1mtsuay2f9 class="col-lg-6 mb-3">
-                                                            <div b-1mtsuay2f9 class="menu-item p-0 m-0">
-                                                                <a b-1mtsuay2f9 href="{% url 'config_app_settings' %}" class="menu-link">
-                                                                    <span b-1mtsuay2f9 class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                                        <span b-1mtsuay2f9 class="svg-icon svg-icon-info svg-icon-1">
-                                                                            <i class="fa-solid fa-gears text-danger fs-1"></i>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_ot_equipment_list' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-info svg-icon-1">
+                                                                                <i
+                                                                                    class="fa-solid fa-user-clock text-primary fs-1"></i>
+                                                                            </span>
                                                                         </span>
-                                                                    </span>
-                                                                    <span b-1mtsuay2f9 class="d-flex flex-column">
-                                                                        <span b-1mtsuay2f9 class="fs-6 fw-bold text-gray-800">System Settings</span>
-                                                                        <span b-1mtsuay2f9 class="fs-7 fw-semibold text-muted">View/Update</span>
-                                                                    </span>
-                                                                </a>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">OT
+                                                                                Equipment</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Add
+                                                                                OT Equipment</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_app_notification' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-info svg-icon-1">
+                                                                                <i
+                                                                                    class="fa fa-envelope-circle-check text-success fs-1"></i>
+                                                                            </span>
+                                                                        </span>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">App
+                                                                                Notification</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Send
+                                                                                notification</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                    <a b-1mtsuay2f9
+                                                                        href="{% url 'config_app_settings' %}"
+                                                                        class="menu-link">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-info svg-icon-1">
+                                                                                <i
+                                                                                    class="fa-solid fa-gears text-gray-650 fs-1"></i>
+                                                                            </span>
+                                                                        </span>
+                                                                        <span b-1mtsuay2f9 class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">System
+                                                                                Settings</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">View/Update</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class='d-flex'>
+                                                                <div class="menu-item col-lg-6"
+                                                                    data-kt-menu-trigger="hover"
+                                                                    data-kt-menu-placement="left-start">
+                                                                    <a href="#" class="menu-link ">
+                                                                        <span b-1mtsuay2f9
+                                                                            class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="svg-icon svg-icon-info svg-icon-1">
+                                                                                <i
+                                                                                    class="fa-solid fa-circle-question fs-1 text-dark"></i>
+                                                                            </span>
+                                                                        </span>
+                                                                        <span class="d-flex flex-column">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-6 fw-bold text-gray-800">Faq's</span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="fs-7 fw-semibold text-muted">Category/Questions/Queries</span>
+                                                                        </span>
+                                                                    </a>
+                                                                    <div class="menu-sub menu-sub-dropdown w-175px py-4"
+                                                                        style="">
+                                                                        <div class="menu-item px-3">
+                                                                            <a href="{% url 'get_faq_category' %}"
+                                                                                class="menu-link px-3">
+                                                                                <i
+                                                                                    class="fa-regular fa-rectangle-list me-2 text-info"></i>Faq
+                                                                                Category
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="menu-item px-3">
+                                                                            <a href="{% url 'get_category_faqs' %}"
+                                                                                class="menu-link px-3">
+                                                                                <i
+                                                                                    class="fa-solid fa-question me-2 text-info"></i>Faq's
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="menu-item px-3">
+                                                                            <a href="{% url 'admin_get_all_submission_faqs' %}"
+                                                                                class="menu-link px-3">
+                                                                                <i
+                                                                                    class="fa-solid fa-clipboard-question me-2 text-info"></i>Replies
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div b-1mtsuay2f9 class="col-lg-6 mb-3">
+                                                                    <div b-1mtsuay2f9 class="menu-item p-0 m-0">
+                                                                        <a b-1mtsuay2f9
+                                                                            href="{% url 'config_subscriptions' %}"
+                                                                            class="menu-link">
+                                                                            <span b-1mtsuay2f9
+                                                                                class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                                                <span b-1mtsuay2f9
+                                                                                    class="svg-icon svg-icon-info svg-icon-1">
+                                                                                    <i
+                                                                                        class="fa-solid fa-bell fs-1 text-danger"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span b-1mtsuay2f9
+                                                                                class="d-flex flex-column">
+                                                                                <span b-1mtsuay2f9
+                                                                                    class="fs-6 fw-bold text-gray-800">Subscription
+                                                                                    Plans</span>
+                                                                                <span b-1mtsuay2f9
+                                                                                    class="fs-7 fw-semibold text-muted">Add/Edit/Delete</span>
+                                                                            </span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -341,68 +508,70 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                   
-                    <!-- Admin section start -->
-                    <div class="app-navbar flex-shrink-0">
-                        <div class="app-navbar-item" id="kt_header_user_menu_toggle">
-                            <div class="d-flex align-items-center border border-dashed border-gray-300 rounded p-2"
-                                data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
-                                data-kt-menu-placement="bottom-end">
-                                <div class="cursor-pointer symbol me-3 symbol-35px symbol-lg-45px">
-                                    <img class="" src="{% static 'book/assets/media/avatars/blank.png' %}" alt="user" />
-                                </div>
-                                <div class="me-4">
-                                    <a href="#" class="text-dark text-hover-primary fs-6 fw-bold">BookMyOT Admin</a>
-                                    <a href="#"
-                                        class="text-gray-400 text-hover-primary fs-7 fw-bold d-block">Admin</a>
-                                </div>
-                                <span class="svg-icon svg-icon-2 svg-icon-gray-500 pt-1">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                            fill="currentColor" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
-                                data-kt-menu="true">
 
-                                <div class="menu-item px-3">
-                                    <div class="menu-content d-flex align-items-center px-3">
-                                        <div class="symbol symbol-50px me-5">
-                                            <img alt="Logo" src= "{% static 'book/assets/media/avatars/blank.png' %}"/>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">
-                                                BookMyOT Admin
+                        <!-- Admin section start -->
+                        <div class="app-navbar flex-shrink-0">
+                            <div class="app-navbar-item" id="kt_header_user_menu_toggle">
+                                <div class="d-flex align-items-center border border-dashed border-gray-300 rounded p-2"
+                                    data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
+                                    data-kt-menu-placement="bottom-end">
+                                    <div class="cursor-pointer symbol me-3 symbol-35px symbol-lg-45px">
+                                        <img class="" src="{% static 'book/assets/media/avatars/blank.png' %}"
+                                            alt="user" />
+                                    </div>
+                                    <div class="me-4">
+                                        <a href="#" class="text-dark text-hover-primary fs-6 fw-bold">BookMyOT Admin</a>
+                                        <a href="#"
+                                            class="text-gray-400 text-hover-primary fs-7 fw-bold d-block">Admin</a>
+                                    </div>
+                                    <span class="svg-icon svg-icon-2 svg-icon-gray-500 pt-1">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                                    data-kt-menu="true">
+
+                                    <div class="menu-item px-3">
+                                        <div class="menu-content d-flex align-items-center px-3">
+                                            <div class="symbol symbol-50px me-5">
+                                                <img alt="Logo"
+                                                    src="{% static 'book/assets/media/avatars/blank.png' %}" />
                                             </div>
-                                            <a href="#"
-                                                class="fw-semibold text-muted text-hover-primary fs-7">Admin</a>
+                                            <div class="d-flex flex-column">
+                                                <div class="fw-bold d-flex align-items-center fs-5">
+                                                    BookMyOT Admin
+                                                </div>
+                                                <a href="#"
+                                                    class="fw-semibold text-muted text-hover-primary fs-7">Admin</a>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="separator my-2"></div>
+                                    {% comment %} <div class="menu-item px-5">
+                                        <a href="#" class="menu-link px-5">My Profile</a>
+                                    </div>
+                                    <div class="separator my-2"></div>
+                                    <div class="menu-item px-5">
+                                        <a href="/hospital/edit/" class="menu-link px-5">Edit Profile</a>
+                                    </div> {% endcomment %}
+                                    <div class="menu-item px-5">
+                                        <a href="{% url 'logout' %}" class="menu-link px-5">Sign Out<i
+                                                class="fas fa-sign-out-alt fs-5 ms-2 text-danger"></i></a>
+                                    </div>
+
                                 </div>
-                                <div class="separator my-2"></div>
-                                {% comment %} <div class="menu-item px-5">
-                                    <a href="#" class="menu-link px-5">My Profile</a>
-                                </div>
-                                <div class="separator my-2"></div>
-                                <div class="menu-item px-5">
-                                    <a href="/hospital/edit/" class="menu-link px-5">Edit Profile</a>
-                                </div> {% endcomment %}
-                                <div class="menu-item px-5">
-                                    <a href="{% url 'logout' %}" class="menu-link px-5">Sign Out<i class="fas fa-sign-out-alt fs-5 ms-2 text-danger"></i></a>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
-                </div>
                     <div b-1mtsuay2f9 class="menu-item menu-lg-down-accordion mt-7">
                         <a b-1mtsuay2f9 href="" class="menu-link">
                             <span b-1mtsuay2f9 class="menu-icon-info">
-                                <i class="fa-solid fa-bell noti"></i>                            
+                                <i class="fa-solid fa-bell noti"></i>
                             </span>
                             <span class="badge rounded-pill badge-notification bg-danger">1</span>
                             <span b-1mtsuay2f9 class="menu-title"></span>
@@ -419,8 +588,10 @@
                             <script>var hostUrl = "assets/";</script>
                             <script src="{% static 'book/assets/lib/global/plugins.bundle.js' %}"></script>
                             <script src="{% static 'book/assets/js/scripts.bundle.js' %}"></script>
-                            <script src="{% static 'book/assets/lib/custom/datatables/datatables.bundle.js' %}"></script>
-                            <script src="{% static 'book/assets/lib/custom/vis-timeline/vis-timeline.bundle.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/lib/custom/datatables/datatables.bundle.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/lib/custom/vis-timeline/vis-timeline.bundle.js' %}"></script>
                             <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
                             <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
                             <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
@@ -430,77 +601,118 @@
                             <script src="{% static 'book/assets/js/custom/widgets.js' %}"></script>
                             <script src="{% static 'book/assets/js/custom/apps/chat/chat.js' %}"></script>
                             <script src="{% static 'book/assets/js/custom/utilities/modals/create-app.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-campaign.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/type.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/budget.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/settings.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/team.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/targets.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/files.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/complete.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/create-project/main.js' %}"></script>
-                            <script src="{% static 'book/assets/js/custom/utilities/modals/users-search.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-campaign.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/type.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/budget.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/settings.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/team.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/targets.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/files.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/complete.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/create-project/main.js' %}"></script>
+                            <script
+                                src="{% static 'book/assets/js/custom/utilities/modals/users-search.js' %}"></script>
                             <script src="{% static 'book/assets/js/site.js' %}"></script>
                             <!-- /* CONTENT COMES HERE */ -->
-                           
-                           
-                          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-                          
-                          {% if messages %}
-                          <script>
-                              document.addEventListener("DOMContentLoaded", function() {
-                                  {% for message in messages %}
-                                      swal({
-                                          title: "{{ message.tags }}",
-                                          text: "{{ message }}",
-                                          icon: "{{ message.tags }}",
-                                          showClass: {
-                                            popup: 'animate_animated animate_fadeInDown'
-                                          },
-                                          hideClass: {
-                                            popup: 'animate_animated animate_fadeOutUp'
-                                          }
-                                      });
-                                  {% endfor %}
-                              });
-                          </script>
-                          {% endif %}
-                          
-
-                        <style>
-                            .noti:hover {
-                              animation: shake 0.5s;
-                              animation-iteration-count: infinite;
-                            }
-                            
-                            @keyframes shake {
-                              0% { transform: translate(1px, 1px) rotate(0deg); }
-                              10% { transform: translate(-1px, -2px) rotate(-1deg); }
-                              20% { transform: translate(-3px, 0px) rotate(1deg); }
-                              30% { transform: translate(3px, 2px) rotate(0deg); }
-                              40% { transform: translate(1px, -1px) rotate(1deg); }
-                              50% { transform: translate(-1px, 2px) rotate(-1deg); }
-                              60% { transform: translate(-3px, 1px) rotate(0deg); }
-                              70% { transform: translate(3px, 1px) rotate(-1deg); }
-                              80% { transform: translate(-1px, -1px) rotate(1deg); }
-                              90% { transform: translate(1px, 2px) rotate(0deg); }
-                              100% { transform: translate(1px, -2px) rotate(-1deg); }
-                            }
-                        </style>
-
-            <div>
-                {% block content %}
-                {% endblock %}
-            </div>
-            <br>
-    </div>
 
 
+                            <link rel="stylesheet"
+                                href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+                            <script
+                                src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+                            {% if messages %}
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        {% for message in messages %}
+                                            swal({
+                                                title: "{{ message.tags }}",
+                                                text: "{{ message }}",
+                                                icon: "{{ message.tags }}",
+                                                showClass: {
+                                                    popup: 'animate_animated animate_fadeInDown'
+                                                },
+                                                hideClass: {
+                                                    popup: 'animate_animated animate_fadeOutUp'
+                                                }
+                                            });
+                                        {% endfor %}
+                                    });
+                                </script>
+                            {% endif %}
 
 
-    </div>
+                            <style>
+                                .noti:hover {
+                                    animation: shake 0.5s;
+                                    animation-iteration-count: infinite;
+                                }
+
+                                @keyframes shake {
+                                    0% {
+                                        transform: translate(1px, 1px) rotate(0deg);
+                                    }
+
+                                    10% {
+                                        transform: translate(-1px, -2px) rotate(-1deg);
+                                    }
+
+                                    20% {
+                                        transform: translate(-3px, 0px) rotate(1deg);
+                                    }
+
+                                    30% {
+                                        transform: translate(3px, 2px) rotate(0deg);
+                                    }
+
+                                    40% {
+                                        transform: translate(1px, -1px) rotate(1deg);
+                                    }
+
+                                    50% {
+                                        transform: translate(-1px, 2px) rotate(-1deg);
+                                    }
+
+                                    60% {
+                                        transform: translate(-3px, 1px) rotate(0deg);
+                                    }
+
+                                    70% {
+                                        transform: translate(3px, 1px) rotate(-1deg);
+                                    }
+
+                                    80% {
+                                        transform: translate(-1px, -1px) rotate(1deg);
+                                    }
+
+                                    90% {
+                                        transform: translate(1px, 2px) rotate(0deg);
+                                    }
+
+                                    100% {
+                                        transform: translate(1px, -2px) rotate(-1deg);
+                                    }
+                                }
+                            </style>
+
+                            <div>
+                                {% block content %}
+                                {% endblock %}
+                            </div>
+                            <br>
+                        </div>
+                    </div>
 </body>
 
 </html>
